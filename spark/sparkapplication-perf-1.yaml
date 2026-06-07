@@ -1,0 +1,33 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: pyspark-perf-1
+  namespace: default
+spec:
+  type: Python
+  pythonVersion: "3"
+  mode: cluster
+  image: swr.cn-north-4.myhuaweicloud.com/yunjisuan-keshe/pyspark-douban:v9
+  imagePullPolicy: Always
+  mainApplicationFile: local:///opt/spark/work/perf_compare.py
+  sparkVersion: "3.4.0"
+  restartPolicy:
+    type: Never
+  sparkConf:
+    spark.executor.instances: "1"
+  driver:
+    cores: 1
+    coreRequest: "100m"
+    memory: "512m"
+    serviceAccount: spark
+    env:
+      - name: PERF_MODE
+        value: "spark"
+      - name: SPARK_EXECUTOR_INSTANCES
+        value: "1"
+  executor:
+    cores: 1
+    coreRequest: "100m"
+    instances: 1
+    memory: "1g"
+    memoryOverhead: "128m"
