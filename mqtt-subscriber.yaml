@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-subscriber
+  namespace: edge-mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqtt-subscriber
+  template:
+    metadata:
+      labels:
+        app: mqtt-subscriber
+    spec:
+      containers:
+      - name: mqtt-subscriber
+        image: swr.cn-north-4.myhuaweicloud.com/yunjisuan-keshe/mqtt-edge:v1
+        imagePullPolicy: IfNotPresent
+        command: ["python", "subscriber.py"]
+        env:
+        - name: BROKER_HOST
+          value: "mosquitto.edge-mqtt.svc.cluster.local"
+        - name: BROKER_PORT
+          value: "1883"
+        - name: MQTT_TOPIC
+          value: "edge/sensor/#"
+        - name: REDIS_HOST
+          value: "redis-svc.keshe.svc.cluster.local"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-auth
+              key: REDIS_PASSWORD
+              optional: true
