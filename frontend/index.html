@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>云计算技术课程设计</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #0f62fe, #6f42c1);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      width: 760px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 34px;
+    }
+    .info {
+      line-height: 1.9;
+      font-size: 18px;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 20px;
+      background: #fff;
+      color: #0f62fe;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    pre {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>云计算技术课程设计</h1>
+    <div class="info">
+      <div>姓名：刘晓慧、陆香凝</div>
+      <div>学号：2023112512、2023112519</div>
+      <div>班级：计算机2023-04班</div>
+      <div>部署平台：华为云 ECS + SWR + CCE + ELB</div>
+      <div>应用架构：Nginx 前端 + Flask 后端 + Redis</div>
+    </div>
+    <a class="button" href="/api/ping" target="_blank">访问后端健康检查 /api/ping</a>
+    <a class="button" href="/api/visit" target="_blank">访问 Redis 计数接口 /api/visit</a>
+    <pre id="result">点击按钮或访问 /api/ping 验证前后端通信。</pre>
+  </div>
+</body>
+</html>
