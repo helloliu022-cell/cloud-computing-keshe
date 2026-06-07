@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: keshe-redis
+    command: ["redis-server", "--requirepass", "redis123456", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: ./backend
+    image: backend:v1
+    container_name: keshe-backend
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: redis123456
+    depends_on:
+      - redis
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+    image: frontend:v1
+    container_name: keshe-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
