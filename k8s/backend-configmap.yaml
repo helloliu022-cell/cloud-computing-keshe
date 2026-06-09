@@ -8,3 +8,13 @@ data:
   REDIS_PORT: "6379"
   APP_ENV: "production"
   LOG_LEVEL: "info"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+  namespace: keshe
+type: Opaque
+data:
+  password: YWRtaW4xMjM=
+
